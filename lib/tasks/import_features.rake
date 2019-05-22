@@ -10,6 +10,7 @@ namespace :features do
       bundle exec rake features:import [BATCH_SIZE=500]
   DESC
   task import: :environment do
+    puts "task import features running..."
     batch_size = ENV.fetch('BATCH_SIZE', 1_000)
     Feature.transaction do
       uri = URI('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
@@ -29,6 +30,7 @@ namespace :features do
         }
       end
       Feature.import new_features, validate: true, on_duplicate_key_ignore: true, batch_size: batch_size
+      puts "task import features done!"
     end
   end
 end
