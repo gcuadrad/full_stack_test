@@ -1,13 +1,15 @@
 class CommentsController < ApplicationController
   include ResponseHandler
   include ExceptionHandler
+  include PaginationHandler
+
   before_action :set_feature, only: [:index]
 
   # GET  /features/:feature_id/comments
   def index
-    json_response(@feature.comments)
+    json_response(paginate_object(@feature.comments))
   end
-  
+
   # POST /features/:feature_id/comments
   def create
     @comment = Comment.create!(comment_params)
