@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_162329) do
+ActiveRecord::Schema.define(version: 2019_05_21_235259) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "email"
+    t.text "body"
+    t.string "feature_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "features", force: :cascade do |t|
+    t.string "feature_id"
     t.float "mag"
     t.string "place"
     t.time "time"
@@ -23,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_162329) do
     t.json "coordinates"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_features_on_feature_id", unique: true
   end
 
 end

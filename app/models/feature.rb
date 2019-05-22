@@ -1,5 +1,8 @@
 class Feature < ApplicationRecord
-  validates :title, :url, :place, :mag_type, :coordinates, presence: true
+  has_many :comments, foreign_key: 'feature_id', primary_key: 'feature_id'
+
+  validates :feature_id, uniqueness: true
+  validates :feature_id, :title, :url, :place, :mag_type, :coordinates, presence: true
   validate :validate_coordinates
 
   def validate_coordinates

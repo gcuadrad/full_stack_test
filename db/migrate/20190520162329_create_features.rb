@@ -13,6 +13,6 @@ class CreateFeatures < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :feature_id_index, :feature_id, unique: true
+    add_index :features, :feature_id, unique: true
   end
 end
